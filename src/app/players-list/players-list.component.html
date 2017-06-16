@@ -1,5 +1,7 @@
-<div>
-  <div *ngFor="let player of players">
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let player of players" class="list-group-item">
       {{player.name}} {{player.lastname}} #{{player.jerseyNumber}} {{Gender[player.gender]}}
-  </div>
+    </li>
+  </ul>
 </div>

@@ -13,15 +13,16 @@ export class EventsListComponent implements OnInit {
 
   ngOnInit() {
     this.events = [
-      { place: 'Gdańsk', date: new Date(), time: new Date().getHours(), price: 100},
-      { place: 'Gdynia', date: new Date('05/03/2017'), time: new Date().getHours()},
-      { place: 'Sopot', date: new Date('01/13/2017')},
+      { title: 'Jabłka', place: 'Gdańsk', date: new Date(), time: new Date().getHours(), price: 100},
+      { title: 'Gruszki', place: 'Gdynia', date: new Date('05/03/2017'), time: new Date().getHours()},
+      { title: 'Pomarańcze', place: 'Sopot', date: new Date('01/13/2017')}
     ];
   }
 
 }
 
 export interface Event {
+  title: string;
   place: string;
   date: Date;
   time?: number;

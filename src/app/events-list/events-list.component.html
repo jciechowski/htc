@@ -1,7 +1,17 @@
-<div class="container offset-sm-3">
+<div class="container">
   <div class="row">
-    <div *ngFor="let event of events" class="col-md-3">
-      {{event.place}} {{event.date}} {{event.time}} {{event.price}}
+    <div class="col-md-3">
+      Menu
+    </div>
+    <div *ngFor="let event of events">
+      <div class="card">
+        <div class="card-block">
+          <h3 class="card-title">{{event.title}}</h3>
+          <p class="card-text">{{event.place}} {{event.date | date}} {{event.time | date:'shortTime' }} {{event.price |
+            currency}}</p>
+          <a href="#" class="btn-sm btn-primary">Facebook event</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
