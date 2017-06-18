@@ -1,17 +1,25 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      Menu
-    </div>
-    <div *ngFor="let event of events">
-      <div class="card">
-        <div class="card-block">
-          <h3 class="card-title">{{event.title}}</h3>
-          <p class="card-text">{{event.place}} {{event.date | date}} {{event.time | date:'shortTime' }} {{event.price |
-            currency}}</p>
-          <a href="#" class="btn-sm btn-primary">Facebook event</a>
-        </div>
+<div class="row">
+  <app-players-list></app-players-list>
+  <div *ngFor="let event of events" class="flex-nowrap">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title">{{event.title}}</h3>
+        <p class="card-text">{{event.place}} {{event.date | date}} {{event.time | date:'shortTime' }} {{event.price |
+          currency}}</p>
+        <a *ngIf="event.facebook" href="{{event.facebook}}" class="btn-sm btn-primary">Facebook event</a>
+        <p class="card-text">
+          <i class="fa fa-mars-stroke" aria-hidden="true"></i> {{event.attendance.man}}
+          <i class="fa fa-venus" aria-hidden="true"></i> {{event.attendance.woman}}
+          <i class="fa fa-genderless" aria-hidden="true"></i> {{event.attendance.tbd}}
+        </p>
       </div>
+    </div>
+    <div *ngFor="let player of playersChild" class="form-check d-flex align-content-center">
+      <label class="form-check-label">
+        <input #attendanceCheckbox (click)="incrementAttendance(event, attendanceCheckbox, player)"
+               class="form-check-input"
+               type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </label>
     </div>
   </div>
 </div>
