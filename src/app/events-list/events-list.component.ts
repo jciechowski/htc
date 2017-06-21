@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player, Players } from '../players-list/index';
 import { Event } from './events';
+import { Gender } from '../players-list/players';
 
 @Component({
   selector: 'app-events-list',
@@ -68,5 +69,19 @@ export class EventsListComponent implements OnInit {
         event.attendance.tbd++;
       }
     }
+  }
+
+  addPlayer() {
+    this.playersChild.push({name: 'Jan', lastname: 'Nowak', jerseyNumber: 1, gender: Gender.man});
+  }
+
+  addEvent() {
+    this.events.push({
+      title: 'Pomarańcze',
+      place: 'Sopot',
+      date: new Date('01/13/2017'),
+      attendance: {man: 0, woman: 0, tbd: this.playersChild.length},
+      facebook: 'http://www.facebook.com'
+    });
   }
 }
