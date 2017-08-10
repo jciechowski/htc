@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player, Players } from '../players-list/index';
 import { Event } from './events';
 import { Gender } from '../players-list/players';
+import { EventsService } from './events.service';
 
 @Component({
   selector: 'app-events-list',
@@ -12,42 +13,12 @@ export class EventsListComponent implements OnInit {
   playersChild: Player[];
   events: Event[];
 
-  constructor() {
+  constructor(private eventsService: EventsService) {
   }
 
   ngOnInit() {
     this.playersChild = Players;
-    this.events = [
-      {
-        title: 'Jabłka',
-        place: 'Gdańsk',
-        date: new Date(),
-        time: new Date().getHours(),
-        price: 100,
-        attendance: {man: 0, woman: 0, tbd: this.playersChild.length}
-      },
-      {
-        title: 'Gruszki',
-        place: 'Gdynia',
-        date: new Date('05/03/2017'),
-        time: new Date().getHours(),
-        attendance: {man: 0, woman: 0, tbd: this.playersChild.length}
-      },
-      {
-        title: 'Owocki',
-        place: 'Wejherowo',
-        date: new Date('06/03/2017'),
-        time: new Date().getHours(),
-        attendance: {man: 0, woman: 0, tbd: this.playersChild.length}
-      },
-      {
-        title: 'Pomarańcze',
-        place: 'Sopot',
-        date: new Date('01/13/2017'),
-        attendance: {man: 0, woman: 0, tbd: this.playersChild.length},
-        facebook: 'http://www.facebook.com'
-      }
-    ];
+    this.eventsService.getEvents().then(events => this.events = events);
   }
 
   incrementAttendance(event: Event, element: HTMLInputElement, player: Player) {

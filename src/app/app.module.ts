@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PlayersListComponent } from './players-list/players-list.component';
 import { EventsListComponent } from './events-list/events-list.component';
+import { EventsService } from './events-list/events.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EventsListComponent } from './events-list/events-list.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [EventsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
