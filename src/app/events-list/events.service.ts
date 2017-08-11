@@ -12,4 +12,6 @@ export class EventsService {
   getEvents(): Promise<Event[]> {
     return Promise.resolve(this.events);
   };
+
+  // addEvent()
 }

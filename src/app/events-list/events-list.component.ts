@@ -7,7 +7,8 @@ import { EventsService } from './events.service';
 @Component({
   selector: 'app-events-list',
   templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.css']
+  styleUrls: ['./events-list.component.css'],
+  providers: [EventsService]
 })
 export class EventsListComponent implements OnInit {
   playersChild: Player[];

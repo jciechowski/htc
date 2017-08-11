@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PlayersListComponent } from './players-list/players-list.component';
 import { EventsListComponent } from './events-list/events-list.component';
-import { EventsService } from './events-list/events.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,7 @@ import { EventsService } from './events-list/events.service';
     FormsModule,
     HttpModule
   ],
-  providers: [EventsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
