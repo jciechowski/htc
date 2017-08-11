@@ -8,11 +8,11 @@ export class EventsService {
   events: Event[];
 
   constructor() {
-    this.events = Events;
   }
 
-  getEvents(): Observable<Event[]> {
-    return Observable.of(this.events);
+  getEvents(): Event[] {
+    Observable.of(Events).subscribe(events => this.events = events);
+    return this.events;
   };
 
   addEvent(event: Event): void {

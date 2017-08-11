@@ -15,6 +15,6 @@ export class PlayersListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.playersService.getPlayers().subscribe(players => this.players = players);
+    this.players = this.playersService.getPlayers();
   }
 }

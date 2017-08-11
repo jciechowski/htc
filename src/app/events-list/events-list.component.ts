@@ -3,6 +3,7 @@ import { Player, Players } from '../players-list/index';
 import { Event } from './events';
 import { Gender } from '../players-list/players';
 import { EventsService } from './events.service';
+import { PlayersService } from '../players-list/players.service';
 
 @Component({
   selector: 'app-events-list',
@@ -14,12 +15,15 @@ export class EventsListComponent implements OnInit {
   playersChild: Player[];
   events: Event[];
 
-  constructor(private eventsService: EventsService) {
+  constructor(private eventsService: EventsService, private playersService: PlayersService) {
   }
 
   ngOnInit() {
-    this.playersChild = Players;
-    this.eventsService.getEvents().subscribe(events => this.events = events);
+    this.playersChild = this.playersService.getPlayers();
+    this.events = this.eventsService.getEvents();
+    this.playersService.playersUpdate.subscribe(players => {
+      this.events.forEach(ev => ev.attendance.tbd = players.length)
+    });
   }
 
   incrementAttendance(event: Event, element: HTMLInputElement, player: Player) {
@@ -44,7 +48,8 @@ export class EventsListComponent implements OnInit {
   }
 
   addPlayer() {
-    this.playersChild.push({name: 'Jan', lastname: 'Nowak', jerseyNumber: 1, gender: Gender.man});
+    const newPlayer = {name: 'Jan', lastname: 'Nowak', jerseyNumber: 1, gender: Gender.man};
+    this.playersService.addPlayer(newPlayer);
   }
 
   addEvent() {
@@ -52,7 +57,7 @@ export class EventsListComponent implements OnInit {
       title: 'Pomarańcze',
       place: 'Sopot',
       date: new Date('01/13/2017'),
-      attendance: {man: 0, woman: 0, tbd: this.playersChild.length},
+      attendance: {man: 0, woman: 0, tbd: this.playersService.getPlayers().length},
       facebook: 'http://www.facebook.com'
     };
     this.eventsService.addEvent(newEvent);
