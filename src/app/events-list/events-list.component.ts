@@ -19,7 +19,7 @@ export class EventsListComponent implements OnInit {
 
   ngOnInit() {
     this.playersChild = Players;
-    this.eventsService.getEvents().then(events => this.events = events);
+    this.eventsService.getEvents().subscribe(events => this.events = events);
   }
 
   incrementAttendance(event: Event, element: HTMLInputElement, player: Player) {
@@ -48,12 +48,13 @@ export class EventsListComponent implements OnInit {
   }
 
   addEvent() {
-    this.events.push({
+    const newEvent: Event = {
       title: 'Pomarańcze',
       place: 'Sopot',
       date: new Date('01/13/2017'),
       attendance: {man: 0, woman: 0, tbd: this.playersChild.length},
       facebook: 'http://www.facebook.com'
-    });
+    };
+    this.eventsService.addEvent(newEvent);
   }
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event, Events } from './events';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class EventsService {
@@ -9,9 +11,11 @@ export class EventsService {
     this.events = Events;
   }
 
-  getEvents(): Promise<Event[]> {
-    return Promise.resolve(this.events);
+  getEvents(): Observable<Event[]> {
+    return Observable.of(this.events);
   };
 
-  // addEvent()
+  addEvent(event: Event): void {
+    this.events.push(event);
+  }
 }
