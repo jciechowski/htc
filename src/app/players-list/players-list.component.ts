@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import { Player, Gender, Players } from './index';
+import { Player, Gender } from './index';
+import { PlayersService } from './players.service';
 
 @Component({
   selector: 'app-players-list',
@@ -10,10 +11,10 @@ export class PlayersListComponent implements OnInit {
   players: Player[];
   Gender: typeof Gender = Gender;
 
-  constructor() {
+  constructor(private playersService: PlayersService) {
   }
 
   ngOnInit() {
-    this.players = Players;
+    this.playersService.getPlayers().subscribe(players => this.players = players);
   }
 }
