@@ -16,11 +16,11 @@ describe('EventsService', () => {
   }));
 
   it('should return events', inject([EventsService], (service: EventsService) => {
-    expect(service.getEvents()).toEqual(Observable.of(Events));
+    expect(service.getEvents()).toEqual(Events);
   }));
 
   it('should add new event', inject([EventsService], (service: EventsService) => {
-    const beforeEventsLength = service.events.length;
+    const beforeEventsLength = service.getEvents().length;
     const newEvent: Event = {
       title: 'Test Event',
       place: 'Some place',
@@ -28,6 +28,6 @@ describe('EventsService', () => {
       attendance: {man: 0, woman: 0, tbd: 2},
     };
     service.addEvent(newEvent);
-    expect(service.events.length).toEqual(beforeEventsLength + 1);
+    expect(service.getEvents().length).toEqual(beforeEventsLength + 1);
   }))
 });

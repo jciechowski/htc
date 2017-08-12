@@ -8,7 +8,6 @@
     <div class="row col-md-10 offset-md-0 flex-nowrap">
       <div *ngFor="let event of events">
         <app-event [event]="event"></app-event>
-        <div></div>
         <div *ngFor="let player of playersChild" class="form-check offset-md-5 checkbox-center">
           <label class="form-check-label">
             <input #attendanceCheckbox (click)="incrementAttendance(event, attendanceCheckbox, player)"

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventComponent } from './event.component';
+import { Events } from '../events';
 
 describe('EventComponent', () => {
   let component: EventComponent;
@@ -16,6 +17,7 @@ describe('EventComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
+    component.event = Events[0];
     fixture.detectChanges();
   });
 
