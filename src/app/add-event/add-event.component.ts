@@ -32,7 +32,6 @@ export class AddEventComponent implements OnInit {
   }
 
   addEvent() {
-    console.log(this.eventForm.value);
     const newEvent: Event = {
       title: this.eventForm.value.title,
       place: this.eventForm.value.place,
