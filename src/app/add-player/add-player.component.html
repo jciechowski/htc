@@ -3,18 +3,18 @@
     <h4 class="modal-title">Add player</h4>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="playerForm">
       <div class="form-group">
         <label for="nameInput">Name</label>
-        <input class="form-control" id="nameInput" [formControl]="name" placeholder="Name">
+        <input class="form-control" id="nameInput" formControlName="name" placeholder="Name">
       </div>
       <div class="form-group">
         <label for="nameInput">Lastname</label>
-        <input class="form-control" id="lastnameInput" [formControl]="lastname" placeholder="Lastname">
+        <input class="form-control" id="lastnameInput" formControlName="lastname" placeholder="Lastname">
       </div>
       <div class="form-group">
         <label for="jerseyInput">Jersey number<br/>
-          <select class="custom-select" id="jerseyInput" [formControl]="jerseyNumber">
+          <select class="custom-select" id="jerseyInput" formControlName="jerseyNumber">
             <option value="1">#1</option>
             <option value="2">#2</option>
             <option value="3">#3</option>
@@ -24,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="genderInput" >Gender<br/>
-          <select class="custom-select" id="genderInput" [formControl]="gender">
+          <select class="custom-select" id="genderInput" formControlName="gender">
             <option value="1">Man</option>
             <option value="2">Woman</option>
           </select>

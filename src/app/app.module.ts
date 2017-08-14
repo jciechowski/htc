@@ -10,6 +10,7 @@ import { EventComponent } from './event/event.component';
 import { PlayersService } from './players-list/players.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddPlayerComponent } from './add-player/add-player.component';
+import { AddEventComponent } from './add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AddPlayerComponent } from './add-player/add-player.component';
     PlayersListComponent,
     EventsListComponent,
     EventComponent,
-    AddPlayerComponent
+    AddPlayerComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../players-list/index';
 import { Event } from './events';
-import { Gender } from '../players-list/players';
 import { EventsService } from './events.service';
 import { PlayersService } from '../players-list/players.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-events-list',
