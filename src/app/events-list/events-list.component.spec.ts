@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventsListComponent } from './events-list.component';
 import { PlayersListComponent } from '../players-list/players-list.component';
-import { EventComponent } from './event/event.component';
+import { EventComponent } from '../event/event.component';
 import { PlayersService } from '../players-list/players.service';
 
 describe('EventsListComponent', () => {

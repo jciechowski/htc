@@ -4,6 +4,7 @@ import { Event } from './events';
 import { Gender } from '../players-list/players';
 import { EventsService } from './events.service';
 import { PlayersService } from '../players-list/players.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-events-list',
@@ -25,6 +26,7 @@ export class EventsListComponent implements OnInit {
       this.events.forEach(ev => ev.attendance.tbd = players.length)
     });
   }
+
 
   incrementAttendance(event: Event, element: HTMLInputElement, player: Player) {
     if (player.gender === 0) {
