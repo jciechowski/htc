@@ -49,11 +49,6 @@ export class EventsListComponent implements OnInit {
     }
   }
 
-  addPlayer() {
-    const newPlayer = {name: 'Jan', lastname: 'Nowak', jerseyNumber: 1, gender: Gender.man};
-    this.playersService.addPlayer(newPlayer);
-  }
-
   addEvent() {
     const newEvent: Event = {
       title: 'Pomarańcze',

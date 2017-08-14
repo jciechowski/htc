@@ -1,18 +1,20 @@
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Add player</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-    </button>
   </div>
   <div class="modal-body">
     <form>
       <div class="form-group">
         <label for="nameInput">Name</label>
-        <input class="form-control" id="nameInput" placeholder="Name">
+        <input class="form-control" id="nameInput" [formControl]="name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="nameInput">Lastname</label>
+        <input class="form-control" id="lastnameInput" [formControl]="lastname" placeholder="Lastname">
       </div>
       <div class="form-group">
         <label for="jerseyInput">Jersey number<br/>
-          <select class="custom-select" id="jerseyInput">
+          <select class="custom-select" id="jerseyInput" [formControl]="jerseyNumber">
             <option value="1">#1</option>
             <option value="2">#2</option>
             <option value="3">#3</option>
@@ -22,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="genderInput" >Gender<br/>
-          <select class="custom-select" id="genderInput">
+          <select class="custom-select" id="genderInput" [formControl]="gender">
             <option value="1">Man</option>
             <option value="2">Woman</option>
           </select>
@@ -31,7 +33,8 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-success" (click)="addPlayer()">Add</button>
+    <button type="button" class="btn btn-outline-danger" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
 
