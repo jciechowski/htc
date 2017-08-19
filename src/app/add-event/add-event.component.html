@@ -3,32 +3,41 @@
     <h4 class="modal-title">Add event</h4>
   </div>
   <div class="modal-body">
-    <form [formGroup]="eventForm">
+    <form [formGroup]="eventForm" novalidate>
       <div class="form-group">
-        <label for="titleInput">Title</label>
-        <input class="form-control" id="titleInput" formControlName="title" placeholder="Title">
+        <label for="title">Title</label>
+        <input class="form-control" id="title" formControlName="title" placeholder="Title">
+        <div class="alert alert-danger" *ngIf="title.invalid && (title.dirty || title.touched)">
+          Title is required.
+        </div>
       </div>
       <div class="form-group">
-        <label for="placeInput">Place</label>
-        <input class="form-control" id="placeInput" formControlName="place" placeholder="Place">
+        <label for="place">Place</label>
+        <input class="form-control" id="place" formControlName="place" placeholder="Place">
+        <div class="alert alert-danger" *ngIf="place.invalid && (place.dirty || place.touched)">
+          Place is required.
+        </div>
       </div>
       <div class="form-group">
         <label for="facebook">FB Event</label>
         <input class="form-control" id="facebook" formControlName="facebook" placeholder="Facebook event">
       </div>
       <div class="form-group">
-        <label for="placeInput">Price</label>
+        <label for="price">Price</label>
         <input type="number" value="1000" min="0" step="10" data-number-to-fixed="0" data-number-stepfactor="100"
-               class="form-control" id="priceInput" formControlName="price" placeholder="price">
+               class="form-control" id="price" formControlName="price" placeholder="price">
       </div>
       <div class="form-group">
-        <label for="date"></label>
+        <label for="date">Date</label>
         <input class="form-control" type="datetime-local" id="date" formControlName="date">
+        <div class="alert alert-danger" *ngIf="date.invalid && (date.dirty || date.touched)">
+          Date and time are required.
+        </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="addEvent()">Add</button>
+    <button type="button" class="btn btn-outline-success" (click)="addEvent()" [disabled]="eventForm.invalid">Add</button>
     <button type="button" class="btn btn-outline-danger" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>

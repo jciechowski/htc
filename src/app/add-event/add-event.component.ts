@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from '../events-list/events.service';
 import { Event } from '../events-list/events';
@@ -11,17 +11,24 @@ import { PlayersService } from '../players-list/players.service';
   styleUrls: ['./add-event.component.css']
 })
 export class AddEventComponent implements OnInit {
-  eventForm = new FormGroup({
-    title: new FormControl(),
-    place: new FormControl(),
-    date: new FormControl(),
-    price: new FormControl(),
-    facebook: new FormControl()
-  });
-
+  eventForm: FormGroup;
+  title: AbstractControl;
+  place: AbstractControl;
+  date: AbstractControl;
   private modalRef: NgbModalRef;
 
-  constructor(private modalService: NgbModal, private eventService: EventsService, private playersService: PlayersService) {
+  constructor(private modalService: NgbModal, private eventService: EventsService,
+              private playersService: PlayersService, private fb: FormBuilder) {
+    this.eventForm = this.fb.group({
+      title: ['', Validators.required],
+      place: ['', Validators.required],
+      date: ['', Validators.required],
+      price: '',
+      facebook: ''
+    });
+    this.title = this.eventForm.controls['title'];
+    this.place = this.eventForm.controls['place'];
+    this.date = this.eventForm.controls['date'];
   }
 
   ngOnInit() {
