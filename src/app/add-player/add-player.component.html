@@ -5,16 +5,22 @@
   <div class="modal-body">
     <form [formGroup]="playerForm">
       <div class="form-group">
-        <label for="nameInput">Name</label>
-        <input class="form-control" id="nameInput" formControlName="name" placeholder="Name">
+        <label for="name">Name</label>
+        <input class="form-control" id="name" formControlName="name" placeholder="Name">
+        <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+          Name is required.
+        </div>
       </div>
       <div class="form-group">
-        <label for="nameInput">Lastname</label>
-        <input class="form-control" id="lastnameInput" formControlName="lastname" placeholder="Lastname">
+        <label for="lastname">Lastname</label>
+        <input class="form-control" id="lastname" formControlName="lastname" placeholder="Lastname">
+        <div class="alert alert-danger" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+          Lastname is required.
+        </div>
       </div>
       <div class="form-group">
-        <label for="jerseyInput">Jersey number<br/>
-          <select class="custom-select" id="jerseyInput" formControlName="jerseyNumber">
+        <label for="jersey">Jersey number<br/>
+          <select class="custom-select" id="jersey" formControlName="jerseyNumber">
             <option value="1">#1</option>
             <option value="2">#2</option>
             <option value="3">#3</option>
@@ -23,12 +29,15 @@
         </label>
       </div>
       <div class="form-group">
-        <label for="genderInput" >Gender<br/>
-          <select class="custom-select" id="genderInput" formControlName="gender">
+        <label for="gender">Gender<br/>
+          <select class="custom-select" id="gender" formControlName="gender">
             <option value="1">Man</option>
             <option value="2">Woman</option>
           </select>
         </label>
+        <div class="alert alert-danger" *ngIf="gender.invalid && (gender.dirty || gender.touched)">
+          Gender is required.
+        </div>
       </div>
     </form>
   </div>

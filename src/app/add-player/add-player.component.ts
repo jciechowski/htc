@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Gender } from '../players-list/players';
 import { PlayersService } from '../players-list/players.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-player',
@@ -10,17 +10,23 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./add-player.component.css']
 })
 export class AddPlayerComponent implements OnInit {
-  playerForm = new FormGroup({
-    name: new FormControl(),
-    lastname: new FormControl(),
-    jerseyNumber: new FormControl(),
-    gender: new FormControl()
-  });
-
-  closeResult: string;
   private modalRef: NgbModalRef;
+  private playerForm: FormGroup;
+  private name: AbstractControl;
+  private lastname: AbstractControl;
+  private jerseyNumber: AbstractControl;
+  private gender: AbstractControl;
 
-  constructor(private modalService: NgbModal, private playersService: PlayersService) {
+  constructor(private modalService: NgbModal, private playersService: PlayersService, private builder: FormBuilder) {
+    this.playerForm = this.builder.group({
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
+      jerseyNumber: ['', []],
+      gender: ['', Validators.required]
+    });
+    this.name = this.playerForm.controls['name'];
+    this.lastname = this.playerForm.controls['lastname'];
+    this.gender = this.playerForm.controls['gender'];
   }
 
   ngOnInit() {

@@ -18,8 +18,8 @@ export class AddEventComponent implements OnInit {
   private modalRef: NgbModalRef;
 
   constructor(private modalService: NgbModal, private eventService: EventsService,
-              private playersService: PlayersService, private fb: FormBuilder) {
-    this.eventForm = this.fb.group({
+              private playersService: PlayersService, private builder: FormBuilder) {
+    this.eventForm = this.builder.group({
       title: ['', Validators.required],
       place: ['', Validators.required],
       date: ['', Validators.required],
