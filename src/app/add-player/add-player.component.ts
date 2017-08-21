@@ -16,6 +16,7 @@ export class AddPlayerComponent implements OnInit {
   private lastname: AbstractControl;
   private jerseyNumber: AbstractControl;
   private gender: AbstractControl;
+  private jerseyValues: Set<number>;
 
   constructor(private modalService: NgbModal, private playersService: PlayersService, private builder: FormBuilder) {
     this.playerForm = this.builder.group({
@@ -27,6 +28,7 @@ export class AddPlayerComponent implements OnInit {
     this.name = this.playerForm.controls['name'];
     this.lastname = this.playerForm.controls['lastname'];
     this.gender = this.playerForm.controls['gender'];
+    this.jerseyValues = this.playersService.getAvailableNumbers();
   }
 
   ngOnInit() {

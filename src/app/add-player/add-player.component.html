@@ -21,10 +21,9 @@
       <div class="form-group">
         <label for="jersey">Jersey number<br/>
           <select class="custom-select" id="jersey" formControlName="jerseyNumber">
-            <option value="1">#1</option>
-            <option value="2">#2</option>
-            <option value="3">#3</option>
-            <option value="4">#4</option>
+            <option *ngFor="let nr of jerseyValues" [ngValue]="nr">
+              {{nr}}
+            </option>
           </select>
         </label>
       </div>
@@ -42,7 +41,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="addPlayer()">Add</button>
+    <button type="button" class="btn btn-outline-success" (click)="addPlayer()" [disabled]="playerForm.invalid">Add</button>
     <button type="button" class="btn btn-outline-danger" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>

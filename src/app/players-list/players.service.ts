@@ -4,10 +4,18 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PlayersService {
-  players: Player[];
   playersUpdate: EventEmitter<Player[]> = new EventEmitter();
+  private players: Player[];
+  private availableNumbers: Set<number> = new Set<number>();
 
   constructor() {
+    this.setAvailableNumbers();
+  }
+
+  private setAvailableNumbers() {
+    for (let i = 0; i < 100; i++) {
+      this.availableNumbers.add(i);
+    }
   }
 
   getPlayers(): Player[] {
@@ -18,6 +26,11 @@ export class PlayersService {
   addPlayer(player: Player): void {
     this.players.push(player);
     this.playersUpdate.emit(this.players);
+    this.availableNumbers.delete(player.jerseyNumber);
+  }
+
+  getAvailableNumbers(): Set<number> {
+    return this.availableNumbers;
   }
 
 }
