@@ -1,9 +1,11 @@
 <app-add-player></app-add-player>
-<div class="card">
-  <ul class="list-group list-group-flush">
-    <li *ngFor="let player of players" class="list-group-item">
-      {{player.name}} {{player.lastname}} #{{player.jerseyNumber}} <br />
-      {{Gender[player.gender]}}
-    </li>
-  </ul>
+<div class="card-deck">
+  <div class="card col-md-9">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let player of players" class="list-group-item">
+        {{player.name}} {{player.lastname}} #{{player.jerseyNumber}}
+        {{Gender[player.gender]}}
+      </li>
+    </ul>
+  </div>
 </div>

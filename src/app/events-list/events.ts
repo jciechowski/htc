@@ -29,6 +29,7 @@ export const Events = [
     place: 'Gdynia',
     date: new Date('05/03/2017'),
     time: new Date().getHours(),
+    price: 0,
     attendance: {man: 0, woman: 0, tbd: Players.length}
   },
   {
@@ -36,12 +37,14 @@ export const Events = [
     place: 'Wejherowo',
     date: new Date('06/03/2017'),
     time: new Date().getHours(),
+    price: 0,
     attendance: {man: 0, woman: 0, tbd: Players.length}
   },
   {
     title: 'Pomarańcze',
     place: 'Sopot',
     date: new Date('01/13/2017'),
+    price: 0,
     attendance: {man: 0, woman: 0, tbd: Players.length},
     facebook: 'http://www.facebook.com'
   }];

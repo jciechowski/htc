@@ -1,22 +1,17 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="column col-md-2 pull-down">
+  <div class="row justify-content-start">
+    <div class="col-2 pull-down">
       <app-players-list></app-players-list>
     </div>
-    <div class="row col-md-10 offset-md-0 flex-nowrap">
-      <app-add-event></app-add-event>
-      <div *ngFor="let event of events">
-        <app-event [event]="event"></app-event>
-        <div *ngFor="let player of playersChild" class="form-check offset-md-5 checkbox-center flex-nowrap">
-          <label class="form-check-label">
-            <input #attendanceCheckbox (click)="incrementAttendance(event, attendanceCheckbox, player)"
-                   class="form-check-input"
-                   type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-          </label>
-        </div>
+    <app-add-event></app-add-event>
+    <div class="col-2" *ngFor="let event of events">
+      <app-event [event]="event"></app-event>
+      <div *ngFor="let player of playersChild">
+        <label>
+          <input #attendanceCheckbox (click)="incrementAttendance(event, attendanceCheckbox, player)"
+                 type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+        </label>
       </div>
     </div>
   </div>
-
 </div>
-
