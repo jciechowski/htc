@@ -23,6 +23,20 @@ export const Events = [
     time: new Date().getHours(),
     price: 100,
     attendance: {man: 0, woman: 0, tbd: Players.length}
+  },  {
+    title: 'Jabłka',
+    place: 'Gdańsk',
+    date: new Date(),
+    time: new Date().getHours(),
+    price: 100,
+    attendance: {man: 0, woman: 0, tbd: Players.length}
+  },  {
+    title: 'Jabłka',
+    place: 'Gdańsk',
+    date: new Date(),
+    time: new Date().getHours(),
+    price: 100,
+    attendance: {man: 0, woman: 0, tbd: Players.length}
   },
   {
     title: 'Gruszki',
