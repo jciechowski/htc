@@ -6,7 +6,7 @@
     <app-add-event></app-add-event>
     <div class="col-2" *ngFor="let event of events">
       <app-event [event]="event"></app-event>
-      <div *ngFor="let player of playersChild" style="text-align: center; padding: 2.2em; height: 2em;">
+      <div *ngFor="let player of playersChild" class="centered-checkbox">
         <label>
           <input #attendanceCheckbox (click)="incrementAttendance(event, attendanceCheckbox, player)"
                  type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
