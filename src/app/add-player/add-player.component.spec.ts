@@ -19,7 +19,4 @@ describe('AddPlayerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
 });

@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddEventComponent } from './add-event.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EventsService } from '../events-list/events.service';
+import { PlayersService } from '../players-list/players.service';
 
 describe('AddEventComponent', () => {
   let component: AddEventComponent;
@@ -8,7 +12,10 @@ describe('AddEventComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEventComponent ]
+      declarations: [ AddEventComponent ],
+      imports: [ReactiveFormsModule,
+        NgbModule.forRoot()],
+      providers: [EventsService, PlayersService]
     })
     .compileComponents();
   }));
@@ -17,9 +24,5 @@ describe('AddEventComponent', () => {
     fixture = TestBed.createComponent(AddEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should be created', () => {
-    expect(component).toBeTruthy();
   });
 });
