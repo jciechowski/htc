@@ -46,5 +46,5 @@ export const Events = [
     date: new Date('01/13/2017'),
     price: 0,
     attendance: {man: 0, woman: 0, tbd: Players.length},
-    facebook: 'http://www.facebook.com'
+    // facebook: 'http://www.facebook.com'
   }];

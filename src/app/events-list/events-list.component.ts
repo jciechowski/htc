@@ -53,7 +53,7 @@ export class EventsListComponent implements OnInit {
       place: 'Sopot',
       date: new Date('01/13/2017'),
       attendance: {man: 0, woman: 0, tbd: this.playersService.getPlayers().length},
-      facebook: 'http://www.facebook.com'
+      // facebook: 'http://www.facebook.com'
     };
     this.eventsService.addEvent(newEvent);
   }
