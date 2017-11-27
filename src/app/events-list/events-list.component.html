@@ -7,7 +7,7 @@
       <app-event [event]="event"></app-event>
       <div *ngFor="let player of playersChild" class="centered-checkbox">
         <label>
-          <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" (change)="incrementAttendance($event, event, player)">
+          <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" (change)="changeAttendance($event, event, player)">
           </mat-slide-toggle>
         </label>
       </div>
