@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MatSlideToggleModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { PlayersListComponent } from './players-list/players-list.component';
@@ -28,10 +29,10 @@ import { EventsService } from './events-list/events.service';
     FormsModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule
   ],
   providers: [PlayersService, EventsService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
