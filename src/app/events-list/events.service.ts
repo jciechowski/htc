@@ -1,3 +1,4 @@
+import { PlayersService } from './../players-list/players.service';
 import { Player, Gender } from './../players-list/players';
 import { Injectable } from '@angular/core';
 import { Event, Events } from './events';
@@ -8,7 +9,7 @@ import 'rxjs/add/observable/of';
 export class EventsService {
   events: Event[];
 
-  constructor() {}
+  constructor(private playersService: PlayersService) {}
 
   getEvents(): Event[] {
     Observable.of(Events).subscribe(events => (this.events = events));
@@ -16,7 +17,19 @@ export class EventsService {
   }
 
   addEvent(event: Event): void {
-    this.events.push(event);
+    const newEvent: Event = {
+      title: event.title,
+      place: event.place,
+      date: event.date,
+      price: event.price,
+      attendance: {
+        man: 0,
+        woman: 0,
+        tbd: this.playersService.getPlayers().length
+      },
+      facebook: event.facebook
+    };
+    this.events.push(newEvent);
   }
 
   changeAttendance(attending: boolean, event: Event, player: Player): void {

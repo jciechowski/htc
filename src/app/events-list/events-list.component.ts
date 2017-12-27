@@ -29,7 +29,11 @@ export class EventsListComponent implements OnInit {
     });
   }
 
-  changeAttendance(slider: MatSlideToggleChange, event: Event, player: Player) {
+  changeAttendance(
+    slider: MatSlideToggleChange,
+    event: Event,
+    player: Player
+  ) {
     this.eventsService.changeAttendance(slider.checked, event, player);
   }
 
