@@ -3,7 +3,7 @@
     <h4 class="modal-title">Add player</h4>
   </div>
   <div class="modal-body">
-    <form [formGroup]="playerForm">
+    <form [formGroup]="playerForm" id="playerForm">
       <div class="form-group">
         <label for="name">Name</label>
         <input class="form-control" id="name" formControlName="name" placeholder="Name">
@@ -19,7 +19,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="jersey">Jersey number<br/>
+        <label for="jersey">Jersey number
+          <br/>
           <select class="custom-select" id="jersey" formControlName="jerseyNumber">
             <option *ngFor="let nr of jerseyValues" [ngValue]="nr">
               {{nr}}
@@ -28,7 +29,8 @@
         </label>
       </div>
       <div class="form-group">
-        <label for="gender">Gender<br/>
+        <label for="gender">Gender
+          <br/>
           <select class="custom-select" id="gender" formControlName="gender">
             <option value="1">Man</option>
             <option value="2">Woman</option>
