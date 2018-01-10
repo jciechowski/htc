@@ -2,18 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MatSlideToggleModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { PlayersListComponent } from './players-list/players-list.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventComponent } from './event/event.component';
 import { PlayersService } from './players-list/players.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { AddEventComponent } from './add-event/add-event.component';
-import { HttpClientModule } from '@angular/common/http';
 import { EventsService } from './events-list/events.service';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { APP_ROUTES } from 'app/routes';
+import { environment } from 'environments/environment';
+import { AuthGuard } from 'app/auth/auth-guard';
 
 @NgModule({
   declarations: [
@@ -22,17 +30,21 @@ import { EventsService } from './events-list/events.service';
     EventsListComponent,
     EventComponent,
     AddPlayerComponent,
-    AddEventComponent
+    AddEventComponent,
+    LoginScreenComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forRoot(APP_ROUTES),
     NgbModule.forRoot(),
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
-  providers: [PlayersService, EventsService],
+  providers: [PlayersService, EventsService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

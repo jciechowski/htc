@@ -1,0 +1,10 @@
+<div class="text-center">
+  <div *ngIf="afAuth.authState | async as user; else showLogin">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
+  </div>
+  <ng-template #showLogin>
+    <p>Please login.</p>
+    <button type="button" class="btn btn-primary" (click)="login()">Login with Google</button>
+  </ng-template>
+</div>
