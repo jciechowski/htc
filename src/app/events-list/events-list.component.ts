@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class EventsListComponent implements OnInit {
   playersChild: Player[];
-  // events: Event[];
+  players$: Observable<Player[]>;
   events$: Observable<Event[]>;
   color = 'primary';
   checked = false;
@@ -22,6 +22,7 @@ export class EventsListComponent implements OnInit {
 
   ngOnInit() {
     this.playersChild = this.playersService.getPlayers();
+    this.players$ = this.playersService.getPlayers$();
     this.events$ = this.eventsService.getEventStream();
     // this.playersService.playersUpdate.subscribe(players => {
     //   this.events$.forEach(ev => (ev.attendance.tbd = players.length));
@@ -42,7 +43,6 @@ export class EventsListComponent implements OnInit {
         woman: 0,
         tbd: this.playersService.getPlayers().length
       }
-      // facebook: 'http://www.facebook.com'
     };
     this.eventsService.addEvent(newEvent);
   }

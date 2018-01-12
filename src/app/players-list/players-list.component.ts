@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player, Gender } from './index';
 import { PlayersService } from './players.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-players-list',
@@ -8,13 +9,12 @@ import { PlayersService } from './players.service';
   styleUrls: ['./players-list.component.css']
 })
 export class PlayersListComponent implements OnInit {
-  players: Player[];
+  players$: Observable<Player[]>;
   Gender: typeof Gender = Gender;
 
-  constructor(private playersService: PlayersService) {
-  }
+  constructor(private playersService: PlayersService) {}
 
   ngOnInit() {
-    this.players = this.playersService.getPlayers();
+    this.players$ = this.playersService.getPlayers$();
   }
 }

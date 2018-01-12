@@ -18,6 +18,9 @@ export class PlayersService {
     }
   }
 
+  getPlayers$(): Observable<Player[]> {
+    return Observable.of(Players);
+  }
   getPlayers(): Player[] {
     Observable.of(Players).subscribe(players => (this.players = players));
     return this.players;
