@@ -12,7 +12,6 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./events-list.component.css']
 })
 export class EventsListComponent implements OnInit {
-  playersChild: Player[];
   players$: Observable<Player[]>;
   events$: Observable<Event[]>;
   color = 'primary';
@@ -21,10 +20,10 @@ export class EventsListComponent implements OnInit {
   constructor(private eventsService: EventsService, private playersService: PlayersService) {}
 
   ngOnInit() {
-    this.playersChild = this.playersService.getPlayers();
-    this.players$ = this.playersService.getPlayers$();
-    this.events$ = this.eventsService.getEventStream();
+    this.players$ = this.playersService.getPlayersFirebase();
+    this.events$ = this.eventsService.getFromFirebase();
     // this.playersService.playersUpdate.subscribe(players => {
+
     //   this.events$.forEach(ev => (ev.attendance.tbd = players.length));
     // });
   }
@@ -41,7 +40,7 @@ export class EventsListComponent implements OnInit {
       attendance: {
         man: 0,
         woman: 0,
-        tbd: this.playersService.getPlayers().length
+        tbd: 0
       }
     };
     this.eventsService.addEvent(newEvent);

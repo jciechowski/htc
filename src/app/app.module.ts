@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MatSlideToggleModule } from '@angular/material';
@@ -42,7 +43,8 @@ import { AuthService } from 'app/auth/auth.service';
     ReactiveFormsModule,
     MatSlideToggleModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [PlayersService, EventsService, AuthService],
   bootstrap: [AppComponent]

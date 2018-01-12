@@ -1,14 +1,21 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Player, Players } from './players';
 import { Observable } from 'rxjs/Observable';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from 'angularfire2/firestore';
 
 @Injectable()
 export class PlayersService {
   playersUpdate: EventEmitter<Player[]> = new EventEmitter();
+  private playersCollection: AngularFirestoreCollection<Player>;
+  private players$: AngularFirestoreDocument<Player[]>;
   private players: Player[];
   private availableNumbers: Set<number> = new Set<number>();
 
-  constructor() {
+  constructor(private afs: AngularFirestore) {
     this.setAvailableNumbers();
   }
 
@@ -18,12 +25,9 @@ export class PlayersService {
     }
   }
 
-  getPlayers$(): Observable<Player[]> {
-    return Observable.of(Players);
-  }
-  getPlayers(): Player[] {
-    Observable.of(Players).subscribe(players => (this.players = players));
-    return this.players;
+  getPlayersFirebase(): Observable<Player[]> {
+    this.playersCollection = this.afs.collection('players');
+    return this.playersCollection.valueChanges();
   }
 
   addPlayer(player: Player): void {

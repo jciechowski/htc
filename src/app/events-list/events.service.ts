@@ -1,23 +1,25 @@
-import { PlayersService } from './../players-list/players.service';
 import { Player, Gender } from './../players-list/players';
 import { Injectable } from '@angular/core';
 import { Event, Events } from './events';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from 'angularfire2/firestore';
 
 @Injectable()
 export class EventsService {
   events: Event[];
+  eventsCollection: AngularFirestoreCollection<Event>;
+  events$: Observable<Event[]>;
 
-  constructor(private playersService: PlayersService) {}
+  constructor(private afs: AngularFirestore) {}
 
-  getEvents(): Event[] {
-    Observable.of(Events).subscribe(events => (this.events = events));
-    return this.events;
-  }
-
-  getEventStream(): Observable<Event[]> {
-    return Observable.of(Events);
+  getFromFirebase(): Observable<Event[]> {
+    this.eventsCollection = this.afs.collection('events');
+    return this.eventsCollection.valueChanges();
   }
 
   addEvent(event: Event): void {
@@ -29,7 +31,7 @@ export class EventsService {
       attendance: {
         man: 0,
         woman: 0,
-        tbd: this.playersService.getPlayers().length
+        tbd: 0
       },
       facebook: event.facebook
     };
