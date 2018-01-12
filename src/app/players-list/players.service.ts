@@ -19,7 +19,7 @@ export class PlayersService {
   }
 
   getPlayers(): Player[] {
-    Observable.of(Players).subscribe(players => this.players = players);
+    Observable.of(Players).subscribe(players => (this.players = players));
     return this.players;
   }
 
@@ -32,5 +32,4 @@ export class PlayersService {
   getAvailableNumbers(): Set<number> {
     return this.availableNumbers;
   }
-
 }

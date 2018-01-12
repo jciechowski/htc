@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
   selector: 'app-login-screen',
@@ -9,15 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-screen.component.css']
 })
 export class LoginScreenComponent implements OnInit {
-  constructor(public afAuth: AngularFireAuth, private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit() {}
+
   login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => {
+    this.auth.login().subscribe(() => {
       this.router.navigate(['/events']);
     });
   }
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.logout();
   }
 }

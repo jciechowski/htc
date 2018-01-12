@@ -21,7 +21,7 @@ import { EventsService } from './events-list/events.service';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { APP_ROUTES } from 'app/routes';
 import { environment } from 'environments/environment';
-import { AuthGuard } from 'app/auth/auth-guard';
+import { AuthService } from 'app/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { AuthGuard } from 'app/auth/auth-guard';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
-  providers: [PlayersService, EventsService, AuthGuard],
+  providers: [PlayersService, EventsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

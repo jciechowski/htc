@@ -1,6 +1,6 @@
 describe('Toggle attendance switch', function() {
   it('should change total frequency', function() {
-    cy.visit('/');
+    cy.visit('/events');
     cy
       .get('.card-text')
       .first()

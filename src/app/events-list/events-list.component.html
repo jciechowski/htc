@@ -3,7 +3,7 @@
     <div class="col-2 pull-down">
       <app-players-list></app-players-list>
     </div>
-    <div class="col-2" *ngFor="let event of events">
+    <div class="col-2" *ngFor="let event of events$ | async">
       <app-event [event]="event"></app-event>
       <div *ngFor="let player of playersChild" class="centered-checkbox">
         <label>

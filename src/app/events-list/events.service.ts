@@ -16,6 +16,10 @@ export class EventsService {
     return this.events;
   }
 
+  getEventStream(): Observable<Event[]> {
+    return Observable.of(Events);
+  }
+
   addEvent(event: Event): void {
     const newEvent: Event = {
       title: event.title,
