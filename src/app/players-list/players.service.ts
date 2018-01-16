@@ -6,7 +6,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
-import { Event } from '../events-list/events';
+import { TeamEvent } from '../events-list/events';
 
 @Injectable()
 export class PlayersService {
@@ -15,7 +15,7 @@ export class PlayersService {
   private players$: AngularFirestoreDocument<Player[]>;
   private availableNumbers: Set<number> = new Set<number>();
   private _playerCount: number;
-  private eventsCollection: AngularFirestoreCollection<Event>;
+  private eventsCollection: AngularFirestoreCollection<TeamEvent>;
 
   get PlayerCount() {
     return this._playerCount;
@@ -23,17 +23,19 @@ export class PlayersService {
 
   constructor(private afs: AngularFirestore) {
     this.playersCollection = this.afs.collection('players');
-    this.playersCollection
-      .valueChanges()
-      .subscribe(allPlayers => (this._playerCount = allPlayers.length));
-    this.setAvailableNumbers();
+    this.playersCollection.valueChanges().subscribe(allPlayers => {
+      this._playerCount = allPlayers.length;
+      this.setAvailableNumbers(allPlayers.map(player => player.jerseyNumber));
+    });
     this.eventsCollection = this.afs.collection('events');
   }
 
-  private setAvailableNumbers() {
-    for (let i = 0; i < 100; i++) {
-      this.availableNumbers.add(i);
-    }
+  private setAvailableNumbers(usedNumbers: number[]) {
+    Array.from(Array(100).keys())
+      .filter(number => !usedNumbers.includes(number))
+      .forEach(i => {
+        this.availableNumbers.add(i);
+      });
   }
 
   getPlayersFirebase(): Observable<Player[]> {
@@ -41,21 +43,13 @@ export class PlayersService {
   }
 
   addPlayer(player: Player): void {
-    // this.players.push(player);
     this.playersCollection.add(player).then(() => {
       this._playerCount++;
     });
-    // this.eventsCollection.valueChanges().subscribe(events => {
-    //   events.forEach(event => {
-    //     event.attendance.tbd++;
-    //     this.eventsCollection.doc<Event>(event.title).update(event);
-    //   });
-    // });
-    // this.playersUpdate.emit(this.players);
     this.availableNumbers.delete(player.jerseyNumber);
   }
 
-  getAvailableNumbers(): Set<number> {
+  get getAvailableNumbers(): Set<number> {
     return this.availableNumbers;
   }
 }

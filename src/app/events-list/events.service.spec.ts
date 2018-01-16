@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { EventsService } from './events.service';
-import { Event, Events } from './events';
+import { TeamEvent, TeamEvents } from './events';
 import { Observable } from 'rxjs/Observable';
 import { PlayersService } from 'app/players-list/players.service';
 
@@ -22,7 +22,7 @@ describe('EventsService', () => {
   it(
     'should return events',
     inject([EventsService], (service: EventsService) => {
-      expect(service.getEvents()).toEqual(Events);
+      expect(service.getEvents()).toEqual(TeamEvents);
     })
   );
 
@@ -30,7 +30,7 @@ describe('EventsService', () => {
     'should add new event',
     inject([EventsService], (service: EventsService) => {
       const beforeEventsLength = service.getEvents().length;
-      const newEvent: Event = {
+      const newEvent: TeamEvent = {
         title: 'Test Event',
         place: 'Some place',
         date: new Date('01/13/2017'),

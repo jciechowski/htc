@@ -1,6 +1,6 @@
 import { Players } from '../players-list/players';
 
-export interface Event {
+export interface TeamEvent {
   id?: string;
   title: string;
   place: string;
@@ -16,7 +16,7 @@ interface Attendance {
   tbd: number;
 }
 
-export const Events = [
+export const TeamEvents = [
   {
     title: 'Jabłka',
     place: 'Gdańsk',

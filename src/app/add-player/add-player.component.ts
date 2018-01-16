@@ -18,7 +18,11 @@ export class AddPlayerComponent implements OnInit {
   private gender: AbstractControl;
   private jerseyValues: Set<number>;
 
-  constructor(private modalService: NgbModal, private playersService: PlayersService, private builder: FormBuilder) {
+  constructor(
+    private modalService: NgbModal,
+    private playersService: PlayersService,
+    private builder: FormBuilder
+  ) {
     this.playerForm = this.builder.group({
       name: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -28,16 +32,14 @@ export class AddPlayerComponent implements OnInit {
     this.name = this.playerForm.controls['name'];
     this.lastname = this.playerForm.controls['lastname'];
     this.gender = this.playerForm.controls['gender'];
-    this.jerseyValues = this.playersService.getAvailableNumbers();
+    this.jerseyValues = this.playersService.getAvailableNumbers;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   open(content) {
     this.modalRef = this.modalService.open(content);
   }
-
 
   addPlayer() {
     const newPlayer = this.getPlayerFormValue();
@@ -51,7 +53,7 @@ export class AddPlayerComponent implements OnInit {
       name: this.playerForm.value.name,
       lastname: this.playerForm.value.lastname,
       jerseyNumber: this.playerForm.value.jerseyNumber,
-      gender: (this.playerForm.value.gender === '1' ? Gender.man : Gender.woman)
+      gender: this.playerForm.value.gender === '1' ? Gender.man : Gender.woman
     };
   }
 }

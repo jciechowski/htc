@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../players-list/index';
-import { Event } from './events';
+import { TeamEvent } from './events';
 import { EventsService } from './events.service';
 import { PlayersService } from '../players-list/players.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class EventsListComponent implements OnInit {
   players$: Observable<Player[]>;
-  events$: Observable<Event[]>;
+  events$: Observable<TeamEvent[]>;
   color = 'primary';
   checked = false;
 
@@ -28,12 +28,12 @@ export class EventsListComponent implements OnInit {
     // });
   }
 
-  changeAttendance(slider: MatSlideToggleChange, event: Event, player: Player) {
+  changeAttendance(slider: MatSlideToggleChange, event: TeamEvent, player: Player) {
     this.eventsService.changeAttendance(slider.checked, event, player);
   }
 
   addEvent() {
-    const newEvent: Event = {
+    const newEvent: TeamEvent = {
       title: 'Pomarańcze',
       place: 'Sopot',
       date: new Date('01/13/2017'),

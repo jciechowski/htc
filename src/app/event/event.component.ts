@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event } from '../events-list/events';
+import { TeamEvent } from '../events-list/events';
 
 @Component({
   selector: 'app-event',
@@ -7,12 +7,9 @@ import { Event } from '../events-list/events';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  @Input() event: Event;
+  @Input() event: TeamEvent;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
