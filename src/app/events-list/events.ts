@@ -1,6 +1,7 @@
 import { Players } from '../players-list/players';
 
 export interface Event {
+  id?: string;
   title: string;
   place: string;
   date: Date;

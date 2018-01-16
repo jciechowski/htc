@@ -8,18 +8,23 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
+import { PlayersService } from 'app/players-list/players.service';
 
 @Injectable()
 export class EventsService {
-  events: Event[];
   eventsCollection: AngularFirestoreCollection<Event>;
-  events$: Observable<Event[]>;
 
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore, private playerService: PlayersService) {}
 
   getFromFirebase(): Observable<Event[]> {
-    this.eventsCollection = this.afs.collection('events');
-    return this.eventsCollection.valueChanges();
+    this.eventsCollection = this.afs.collection<Event>('events');
+    return this.eventsCollection.snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data() as Event;
+        const id = action.payload.doc.id;
+        return { id, ...data };
+      });
+    });
   }
 
   addEvent(event: Event): void {
@@ -31,11 +36,11 @@ export class EventsService {
       attendance: {
         man: 0,
         woman: 0,
-        tbd: 0
+        tbd: this.playerService.PlayerCount
       },
       facebook: event.facebook
     };
-    this.events.push(newEvent);
+    this.eventsCollection.add(newEvent).then(addedEvent => (event.id = addedEvent.id));
   }
 
   changeAttendance(attending: boolean, event: Event, player: Player): void {
@@ -47,5 +52,6 @@ export class EventsService {
       event.attendance[playerGender]--;
       event.attendance.tbd++;
     }
+    this.eventsCollection.doc<Event>(event.id).update(event);
   }
 }
