@@ -1,6 +1,6 @@
 import { Player, Gender } from './../players-list/players';
 import { Injectable } from '@angular/core';
-import { TeamEvent, TeamEvents } from './events';
+import { TeamEvent } from './events';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {
@@ -16,7 +16,7 @@ export class EventsService {
 
   constructor(private afs: AngularFirestore, private playerService: PlayersService) {}
 
-  getFromFirebase(): Observable<TeamEvent[]> {
+  getEvents(): Observable<TeamEvent[]> {
     this.eventsCollection = this.afs.collection<TeamEvent>('events');
     return this.eventsCollection.snapshotChanges().map(actions => {
       return actions.map(action => {
@@ -38,7 +38,8 @@ export class EventsService {
         woman: 0,
         tbd: this.playerService.PlayerCount
       },
-      facebook: event.facebook
+      facebook: event.facebook,
+      players: []
     };
     this.eventsCollection.add(newEvent).then(addedEvent => (event.id = addedEvent.id));
   }
@@ -52,5 +53,17 @@ export class EventsService {
       event.attendance[playerGender]--;
       event.attendance.tbd++;
     }
+    this.updateEvent(event, player);
+  }
+
+  updateEvent(event: TeamEvent, player: Player): void {
+    const players: Array<Player> = event.players;
+    // console.log(event);
+    players.push(player);
+    const updatedEvent: TeamEvent = {
+      ...event,
+      players
+    };
+    // this.eventsCollection.doc<TeamEvent>(event.id).update(updatedEvent);
   }
 }

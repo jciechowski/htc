@@ -15,6 +15,6 @@ export class PlayersListComponent implements OnInit {
   constructor(private playersService: PlayersService) {}
 
   ngOnInit() {
-    this.players$ = this.playersService.getPlayersFirebase();
+    this.players$ = this.playersService.getPlayers();
   }
 }

@@ -3,11 +3,11 @@
     <div class="col-2 pull-down">
       <app-players-list></app-players-list>
     </div>
-    <div class="col-2" *ngFor="let event of events$ | async">
-      <app-event [event]="event"></app-event>
+    <div class="col-2" *ngFor="let teamEvent of teamEvents$ | async">
+      <app-event [event]="teamEvent"></app-event>
       <div *ngFor="let player of players$ | async" class="centered-checkbox">
         <label>
-          <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" (change)="changeAttendance($event, event, player)">
+          <mat-slide-toggle class="example-margin" [color]="color" [checked]="playerAttending(teamEvent, player)" (change)="changeAttendance($event, teamEvent, player)">
           </mat-slide-toggle>
         </label>
       </div>

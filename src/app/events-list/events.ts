@@ -1,4 +1,4 @@
-import { Players } from '../players-list/players';
+import { Player } from '../players-list/players';
 
 export interface TeamEvent {
   id?: string;
@@ -8,6 +8,7 @@ export interface TeamEvent {
   price?: number;
   attendance: Attendance;
   facebook?: string;
+  players: Array<Player>;
 }
 
 interface Attendance {
@@ -15,38 +16,3 @@ interface Attendance {
   woman: number;
   tbd: number;
 }
-
-export const TeamEvents = [
-  {
-    title: 'Jabłka',
-    place: 'Gdańsk',
-    date: new Date(),
-    time: new Date().getHours(),
-    price: 100,
-    attendance: { man: 0, woman: 0, tbd: Players.length }
-  },
-  {
-    title: 'Jabłka',
-    place: 'Gdańsk',
-    date: new Date(),
-    time: new Date().getHours(),
-    price: 100,
-    attendance: { man: 0, woman: 0, tbd: Players.length }
-  },
-  {
-    title: 'Jabłka',
-    place: 'Gdańsk',
-    date: new Date(),
-    time: new Date().getHours(),
-    price: 100,
-    attendance: { man: 0, woman: 0, tbd: Players.length }
-  },
-  {
-    title: 'Gruszki',
-    place: 'Gdynia',
-    date: new Date('05/03/2017'),
-    time: new Date().getHours(),
-    price: 0,
-    attendance: { man: 0, woman: 0, tbd: Players.length }
-  }
-];

@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Player, Players } from './players';
+import { Player } from './players';
 import { Observable } from 'rxjs/Observable';
 import {
   AngularFirestore,
@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
 import { TeamEvent } from '../events-list/events';
+import { EventsService } from 'app/events-list/events.service';
 
 @Injectable()
 export class PlayersService {
@@ -15,7 +16,6 @@ export class PlayersService {
   private players$: AngularFirestoreDocument<Player[]>;
   private availableNumbers: Set<number> = new Set<number>();
   private _playerCount: number;
-  private eventsCollection: AngularFirestoreCollection<TeamEvent>;
 
   get PlayerCount() {
     return this._playerCount;
@@ -23,11 +23,11 @@ export class PlayersService {
 
   constructor(private afs: AngularFirestore) {
     this.playersCollection = this.afs.collection('players');
+
     this.playersCollection.valueChanges().subscribe(allPlayers => {
       this._playerCount = allPlayers.length;
       this.setAvailableNumbers(allPlayers.map(player => player.jerseyNumber));
     });
-    this.eventsCollection = this.afs.collection('events');
   }
 
   private setAvailableNumbers(usedNumbers: number[]) {
@@ -38,8 +38,14 @@ export class PlayersService {
       });
   }
 
-  getPlayersFirebase(): Observable<Player[]> {
-    return this.playersCollection.valueChanges();
+  getPlayers(): Observable<Player[]> {
+    return this.playersCollection.snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const data = action.payload.doc.data() as Player;
+        const id = action.payload.doc.id;
+        return { id, ...data };
+      });
+    });
   }
 
   addPlayer(player: Player): void {
