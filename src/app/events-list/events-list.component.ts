@@ -16,15 +16,8 @@ export class EventsListComponent implements OnInit {
   teamEvents$: Observable<TeamEvent[]>;
   color = 'primary';
   checked = false;
-  attending: { [key: string]: Array<string> };
 
-  constructor(private eventsService: EventsService, private playersService: PlayersService) {
-    this.attending = {
-      Random: ['Ej5eBSO7mm6qaAJptZGe', 'IniwFcFkDJLZWc8yU9wp'],
-      'Random #2': [],
-      Test: []
-    };
-  }
+  constructor(private eventsService: EventsService, private playersService: PlayersService) {}
 
   ngOnInit() {
     this.players$ = this.playersService.getPlayers();
@@ -32,13 +25,6 @@ export class EventsListComponent implements OnInit {
   }
 
   changeAttendance(slider: MatSlideToggleChange, event: TeamEvent, player: Player) {
-    if (slider.checked) {
-      this.attending[event.title].push(player.id);
-    } else {
-      const playerToRemove = this.attending[event.title].indexOf(player.id);
-      this.attending[event.title].splice(playerToRemove, 1);
-    }
-    console.log(player);
     this.eventsService.changeAttendance(slider.checked, event, player);
   }
 
@@ -52,12 +38,12 @@ export class EventsListComponent implements OnInit {
         woman: 0,
         tbd: 0
       },
-      players: []
+      attendingPlayers: []
     };
     this.eventsService.addEvent(newEvent);
   }
 
   playerAttending(event: TeamEvent, player: Player): boolean {
-    return this.attending[event.title].includes(player.id);
+    return event.attendingPlayers.includes(player.id);
   }
 }

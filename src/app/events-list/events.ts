@@ -8,7 +8,7 @@ export interface TeamEvent {
   price?: number;
   attendance: Attendance;
   facebook?: string;
-  players: Array<Player>;
+  attendingPlayers: Array<string>;
 }
 
 interface Attendance {

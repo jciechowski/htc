@@ -39,7 +39,7 @@ export class EventsService {
         tbd: this.playerService.PlayerCount
       },
       facebook: event.facebook,
-      players: []
+      attendingPlayers: []
     };
     this.eventsCollection.add(newEvent).then(addedEvent => (event.id = addedEvent.id));
   }
@@ -49,21 +49,31 @@ export class EventsService {
     if (attending) {
       event.attendance[playerGender]++;
       event.attendance.tbd--;
+      this.addPlayer(event, player.id);
+      event.attendingPlayers.push(player.id);
     } else {
       event.attendance[playerGender]--;
       event.attendance.tbd++;
+      this.removePlayer(event, player.id);
     }
-    this.updateEvent(event, player);
   }
 
-  updateEvent(event: TeamEvent, player: Player): void {
-    const players: Array<Player> = event.players;
-    // console.log(event);
-    players.push(player);
+  addPlayer(event: TeamEvent, playerId: string) {
+    let { attendingPlayers } = event;
+    attendingPlayers.push(playerId);
+    this.updateEvent(event, attendingPlayers);
+  }
+
+  removePlayer(event: TeamEvent, playerId: string) {
+    let attendingPlayers = event.attendingPlayers.filter(id => id !== playerId);
+    this.updateEvent(event, attendingPlayers);
+  }
+
+  updateEvent(event: TeamEvent, attendingPlayers: Array<string>): void {
     const updatedEvent: TeamEvent = {
       ...event,
-      players
+      attendingPlayers
     };
-    // this.eventsCollection.doc<TeamEvent>(event.id).update(updatedEvent);
+    this.eventsCollection.doc<TeamEvent>(event.id).update(updatedEvent);
   }
 }
