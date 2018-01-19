@@ -35,8 +35,7 @@ export class EventsListComponent implements OnInit {
       date: new Date('01/13/2017'),
       attendance: {
         man: 0,
-        woman: 0,
-        tbd: 0
+        woman: 0
       },
       attendingPlayers: []
     };

@@ -35,8 +35,7 @@ export class EventsService {
       price: event.price,
       attendance: {
         man: 0,
-        woman: 0,
-        tbd: this.playerService.PlayerCount
+        woman: 0
       },
       facebook: event.facebook,
       attendingPlayers: []
@@ -48,12 +47,10 @@ export class EventsService {
     const playerGender = Gender[player.gender];
     if (attending) {
       event.attendance[playerGender]++;
-      event.attendance.tbd--;
       this.addPlayer(event, player.id);
       event.attendingPlayers.push(player.id);
     } else {
       event.attendance[playerGender]--;
-      event.attendance.tbd++;
       this.removePlayer(event, player.id);
     }
   }

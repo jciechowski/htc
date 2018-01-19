@@ -14,5 +14,4 @@ export interface TeamEvent {
 interface Attendance {
   man: number;
   woman: number;
-  tbd: number;
 }

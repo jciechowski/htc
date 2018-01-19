@@ -15,17 +15,11 @@ export class PlayersService {
   private playersCollection: AngularFirestoreCollection<Player>;
   private players$: AngularFirestoreDocument<Player[]>;
   private availableNumbers: Set<number> = new Set<number>();
-  private _playerCount: number;
-
-  get PlayerCount() {
-    return this._playerCount;
-  }
 
   constructor(private afs: AngularFirestore) {
     this.playersCollection = this.afs.collection('players');
 
     this.playersCollection.valueChanges().subscribe(allPlayers => {
-      this._playerCount = allPlayers.length;
       this.setAvailableNumbers(allPlayers.map(player => player.jerseyNumber));
     });
   }
@@ -49,9 +43,6 @@ export class PlayersService {
   }
 
   addPlayer(player: Player): void {
-    this.playersCollection.add(player).then(() => {
-      this._playerCount++;
-    });
     this.availableNumbers.delete(player.jerseyNumber);
   }
 
