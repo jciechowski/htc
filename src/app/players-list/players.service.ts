@@ -44,6 +44,7 @@ export class PlayersService {
 
   addPlayer(player: Player): void {
     this.availableNumbers.delete(player.jerseyNumber);
+    this.playersCollection.add(player);
   }
 
   get getAvailableNumbers(): Set<number> {

@@ -28,20 +28,6 @@ export class EventsListComponent implements OnInit {
     this.eventsService.changeAttendance(slider.checked, event, player);
   }
 
-  addEvent() {
-    const newEvent: TeamEvent = {
-      title: 'Pomarańcze',
-      place: 'Sopot',
-      date: new Date('01/13/2017'),
-      attendance: {
-        man: 0,
-        woman: 0
-      },
-      attendingPlayers: []
-    };
-    this.eventsService.addEvent(newEvent);
-  }
-
   playerAttending(event: TeamEvent, player: Player): boolean {
     return event.attendingPlayers.includes(player.id);
   }
