@@ -23,6 +23,7 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { APP_ROUTES } from 'app/routes';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/auth/auth.service';
+import { AuthGuard } from 'app/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { AuthService } from 'app/auth/auth.service';
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [PlayersService, EventsService, AuthService],
+  providers: [PlayersService, EventsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

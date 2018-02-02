@@ -14,7 +14,9 @@ export class AuthService {
 
   login(): Observable<boolean> {
     return Observable.fromPromise(
-      this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      this.afAuth.auth
+        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        .then(r => (this._isLoggedIn = true))
     );
   }
 
