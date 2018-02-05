@@ -10,6 +10,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MatSlideToggleModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatToolbarModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { PlayersListComponent } from './players-list/players-list.component';
@@ -24,6 +26,8 @@ import { APP_ROUTES } from 'app/routes';
 import { environment } from 'environments/environment';
 import { AuthService } from 'app/auth/auth.service';
 import { AuthGuard } from 'app/auth/auth.guard';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { AuthGuard } from 'app/auth/auth.guard';
     EventComponent,
     AddPlayerComponent,
     AddEventComponent,
-    LoginScreenComponent
+    LoginScreenComponent,
+    NavbarComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,9 @@ import { AuthGuard } from 'app/auth/auth.guard';
     MatSlideToggleModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [PlayersService, EventsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
