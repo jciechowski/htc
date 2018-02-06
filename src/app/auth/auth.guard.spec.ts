@@ -57,12 +57,11 @@ describe('AuthGuard', () => {
   });
 
   it('should redirect when not logged in', () => {
-    authServiceStub.authState$.next(false);
     expect(routerStub.navigate).toHaveBeenCalledWith(['login']);
   });
 
   it('should allow activation when logged in', () => {
     authServiceStub.authState$.next(true);
-    guard.canActivate().subscribe(canActivate => expect(canActivate).toBeTruthy());
+    expect(isAuthRef).toBeTruthy();
   });
 });
