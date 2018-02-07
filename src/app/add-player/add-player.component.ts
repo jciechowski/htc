@@ -9,7 +9,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   templateUrl: './add-player.component.html',
   styleUrls: ['./add-player.component.css']
 })
-export class AddPlayerComponent implements OnInit {
+export class AddPlayerComponent {
   private modalRef: NgbModalRef;
   private playerForm: FormGroup;
   private name: AbstractControl;
@@ -34,8 +34,6 @@ export class AddPlayerComponent implements OnInit {
     this.gender = this.playerForm.controls['gender'];
     this.jerseyValues = this.playersService.getAvailableNumbers;
   }
-
-  ngOnInit() {}
 
   open(content) {
     this.modalRef = this.modalService.open(content);

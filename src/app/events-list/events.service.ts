@@ -14,10 +14,11 @@ import { PlayersService } from 'app/players-list/players.service';
 export class EventsService {
   eventsCollection: AngularFirestoreCollection<TeamEvent>;
 
-  constructor(private afs: AngularFirestore, private playerService: PlayersService) {}
+  constructor(private afs: AngularFirestore, private playerService: PlayersService) {
+    this.eventsCollection = this.afs.collection<TeamEvent>('events');
+  }
 
   getEvents(): Observable<TeamEvent[]> {
-    this.eventsCollection = this.afs.collection<TeamEvent>('events');
     return this.eventsCollection.snapshotChanges().map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data() as TeamEvent;
@@ -48,25 +49,24 @@ export class EventsService {
     if (attending) {
       event.attendance[playerGender]++;
       this.addPlayer(event, player.id);
-      event.attendingPlayers.push(player.id);
     } else {
       event.attendance[playerGender]--;
       this.removePlayer(event, player.id);
     }
   }
 
-  addPlayer(event: TeamEvent, playerId: string) {
-    let { attendingPlayers } = event;
+  private addPlayer(event: TeamEvent, playerId: string) {
+    const { attendingPlayers } = event;
     attendingPlayers.push(playerId);
     this.updateEvent(event, attendingPlayers);
   }
 
-  removePlayer(event: TeamEvent, playerId: string) {
-    let attendingPlayers = event.attendingPlayers.filter(id => id !== playerId);
-    this.updateEvent(event, attendingPlayers);
+  private removePlayer(event: TeamEvent, playerId: string) {
+    event.attendingPlayers = event.attendingPlayers.filter(id => id !== playerId);
+    this.updateEvent(event, event.attendingPlayers);
   }
 
-  updateEvent(event: TeamEvent, attendingPlayers: Array<string>): void {
+  private updateEvent(event: TeamEvent, attendingPlayers: Array<string>): void {
     const updatedEvent: TeamEvent = {
       ...event,
       attendingPlayers

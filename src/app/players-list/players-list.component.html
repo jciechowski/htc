@@ -4,7 +4,7 @@
     <div class="card">
       <ul class="list-group list-group-flush">
         <li *ngFor="let player of players$ | async" class="list-group-item">
-          {{player.name}} {{player.lastname}} #{{player.jerseyNumber}} {{Gender[player.gender]}}
+          {{ player.name }} {{ player.lastname }} #{{ player.jerseyNumber }} {{ Gender[player.gender] }}
         </li>
       </ul>
     </div>

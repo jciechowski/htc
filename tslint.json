@@ -39,7 +39,7 @@
     "prefer-const": true,
     "quotemark": [true, "single"],
     "radix": true,
-    "semicolon": ["always"],
+    "semicolon": [true],
     "triple-equals": [true, "allow-null-check"],
     "typedef-whitespace": [
       true,
@@ -54,6 +54,7 @@
     "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
+    "angular-whitespace": [true, "check-interpolation"],
     "whitespace": [
       true,
       "check-branch",
