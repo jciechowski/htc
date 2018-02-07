@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -27,6 +28,7 @@ import { AuthService } from 'app/auth/auth.service';
 import { AuthGuard } from 'app/auth/auth.guard';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarModule } from 'angular-calendar';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { CalendarComponent } from './calendar/calendar.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(APP_ROUTES),
@@ -52,7 +55,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    CalendarModule.forRoot()
   ],
   providers: [PlayersService, EventsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
