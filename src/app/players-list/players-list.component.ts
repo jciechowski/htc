@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Player, Gender } from './index';
+import { Player, Gender } from '../shared/models/players';
 import { PlayersService } from './players.service';
 import { Observable } from 'rxjs/Observable';
 

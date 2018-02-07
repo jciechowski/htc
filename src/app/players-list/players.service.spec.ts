@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { PlayersService } from './players.service';
-import { Gender } from './players';
+import { Gender } from '../shared/models/players';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from '../players-list/index';
-import { TeamEvent } from './events';
-import { EventsService } from './events.service';
+import { Player } from '../shared/models/players';
+import { TeamEvent } from '../shared/models/events';
+import { EventsService } from '../shared/services/events.service';
 import { PlayersService } from '../players-list/players.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Observable } from 'rxjs/Observable';

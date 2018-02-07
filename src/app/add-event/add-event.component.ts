@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EventsService } from '../events-list/events.service';
-import { TeamEvent } from '../events-list/events';
+import { EventsService } from '../shared/services/events.service';
+import { TeamEvent } from '../shared/models/events';
 import { PlayersService } from '../players-list/players.service';
 
 @Component({

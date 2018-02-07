@@ -20,7 +20,7 @@ import { EventComponent } from './event/event.component';
 import { PlayersService } from './players-list/players.service';
 import { AddPlayerComponent } from './add-player/add-player.component';
 import { AddEventComponent } from './add-event/add-event.component';
-import { EventsService } from './events-list/events.service';
+import { EventsService } from './shared/services/events.service';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { APP_ROUTES } from 'app/routes';
 import { environment } from 'environments/environment';

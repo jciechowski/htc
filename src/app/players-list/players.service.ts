@@ -1,13 +1,13 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Player } from './players';
 import { Observable } from 'rxjs/Observable';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
-import { TeamEvent } from '../events-list/events';
-import { EventsService } from 'app/events-list/events.service';
+import { Player } from '../shared/models/players';
+import { TeamEvent } from '../shared/models/events';
+import { EventsService } from '../shared/services/events.service';
 
 @Injectable()
 export class PlayersService {

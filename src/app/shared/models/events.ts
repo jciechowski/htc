@@ -1,4 +1,4 @@
-import { Player } from '../players-list/players';
+import { Player } from '../models/players';
 
 export interface TeamEvent {
   id?: string;

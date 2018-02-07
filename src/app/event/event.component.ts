@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TeamEvent } from '../events-list/events';
+import { TeamEvent } from '../shared/models/events';
 
 @Component({
   selector: 'app-event',

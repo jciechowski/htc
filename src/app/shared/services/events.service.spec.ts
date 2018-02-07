@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { EventsService } from './events.service';
-import { TeamEvent } from './events';
+import { TeamEvent } from '../models/events';
 import { Observable } from 'rxjs/Observable';
 import { PlayersService } from 'app/players-list/players.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Player, Gender } from 'app/players-list';
+import { Player, Gender } from '../models/players';
 
 const collectionStub = {
   valueChanges: jasmine.createSpy('valueChanges').and.returnValue(Observable.of([])),

@@ -1,6 +1,6 @@
-import { Player, Gender } from './../players-list/players';
+import { Player, Gender } from '../models/players';
 import { Injectable } from '@angular/core';
-import { TeamEvent } from './events';
+import { TeamEvent } from '../models/events';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {
