@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { isSameDay, isSameMonth } from 'date-fns';
+import { EventsService } from '../shared/services/events.service';
+import { TeamEvent } from '../shared/models/events';
 
 @Component({
   selector: 'app-calendar',
@@ -10,6 +12,9 @@ import { isSameDay, isSameMonth } from 'date-fns';
 export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   activeDayIsOpen = true;
+
+  view = 'month';
+  teamEvents: Array<CalendarEvent>;
   events: CalendarEvent[] = [
     {
       title: 'Click me',
@@ -23,9 +28,14 @@ export class CalendarComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(private eventsService: EventsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.teamEvents = [];
+    this.eventsService
+      .getCalendarEvents()
+      .subscribe(calendarEvents => (this.teamEvents = calendarEvents));
+  }
 
   eventClicked({ event }: { event: CalendarEvent }): void {
     console.log('Event clicked', event);

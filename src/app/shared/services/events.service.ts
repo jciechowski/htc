@@ -9,6 +9,7 @@ import {
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
 import { PlayersService } from 'app/players-list/players.service';
+import { CalendarEvent } from 'calendar-utils';
 
 @Injectable()
 export class EventsService {
@@ -24,6 +25,20 @@ export class EventsService {
         const data = action.payload.doc.data() as TeamEvent;
         const id = action.payload.doc.id;
         return { id, ...data };
+      });
+    });
+  }
+
+  getCalendarEvents(): Observable<CalendarEvent[]> {
+    return this.eventsCollection.snapshotChanges().map(actions => {
+      return actions.map(action => {
+        const teamEvent = action.payload.doc.data() as TeamEvent;
+        const calendarEvent: CalendarEvent = {
+          title: teamEvent.title,
+          color: colors.yellow,
+          start: new Date(teamEvent.date)
+        };
+        return calendarEvent;
       });
     });
   }
@@ -74,3 +89,18 @@ export class EventsService {
     this.eventsCollection.doc<TeamEvent>(event.id).update(updatedEvent);
   }
 }
+
+export const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  }
+};
