@@ -4,7 +4,7 @@ import { TeamEvent } from '../shared/models/events';
 import { EventsService } from '../shared/services/events.service';
 import { PlayersService } from '../players-list/players.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-events-list',

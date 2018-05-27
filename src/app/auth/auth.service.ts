@@ -1,5 +1,6 @@
+
+import {from as observableFrom,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
@@ -12,7 +13,7 @@ export class AuthService {
   }
 
   login(): Observable<boolean> {
-    return Observable.fromPromise(
+    return observableFrom(
       this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
     );
   }

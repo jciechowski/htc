@@ -1,15 +1,17 @@
+
+import { map } from 'rxjs/operators';
 import { Player, Gender } from '../models/players';
 import { Injectable } from '@angular/core';
 import { TeamEvent } from '../models/events';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs';
+import { CalendarEvent } from 'calendar-utils';
+
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
 import { PlayersService } from 'app/players-list/players.service';
-import { CalendarEvent } from 'calendar-utils';
 
 @Injectable()
 export class EventsService {
@@ -20,17 +22,17 @@ export class EventsService {
   }
 
   getEvents(): Observable<TeamEvent[]> {
-    return this.eventsCollection.snapshotChanges().map(actions => {
+    return this.eventsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data() as TeamEvent;
         const id = action.payload.doc.id;
         return { id, ...data };
       });
-    });
+    }));
   }
 
   getCalendarEvents(): Observable<CalendarEvent[]> {
-    return this.eventsCollection.snapshotChanges().map(actions => {
+    return this.eventsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(action => {
         const teamEvent = action.payload.doc.data() as TeamEvent;
         const calendarEvent: CalendarEvent = {
@@ -40,7 +42,7 @@ export class EventsService {
         };
         return calendarEvent;
       });
-    });
+    }));
   }
 
   addEvent(event: TeamEvent): void {
