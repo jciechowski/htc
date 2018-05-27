@@ -1,6 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Player } from './players';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -33,13 +35,13 @@ export class PlayersService {
   }
 
   getPlayers(): Observable<Player[]> {
-    return this.playersCollection.snapshotChanges().map(actions => {
+    return this.playersCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data() as Player;
         const id = action.payload.doc.id;
         return { id, ...data };
       });
-    });
+    }));
   }
 
   addPlayer(player: Player): void {

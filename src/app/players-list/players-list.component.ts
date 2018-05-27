@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Player, Gender } from './index';
 import { PlayersService } from './players.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-players-list',

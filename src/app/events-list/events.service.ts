@@ -1,8 +1,10 @@
+
+import {map} from 'rxjs/operators';
 import { Player, Gender } from './../players-list/players';
 import { Injectable } from '@angular/core';
 import { TeamEvent } from './events';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs';
+
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -19,13 +21,13 @@ export class EventsService {
   }
 
   getEvents(): Observable<TeamEvent[]> {
-    return this.eventsCollection.snapshotChanges().map(actions => {
+    return this.eventsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data() as TeamEvent;
         const id = action.payload.doc.id;
         return { id, ...data };
       });
-    });
+    }));
   }
 
   addEvent(event: TeamEvent): void {
