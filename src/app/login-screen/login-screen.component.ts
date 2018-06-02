@@ -9,9 +9,9 @@ import { AuthService } from 'app/auth/auth.service';
   styleUrls: ['./login-screen.component.css']
 })
 export class LoginScreenComponent implements OnInit {
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, public auth: AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   login() {
     this.auth.login().subscribe(() => {
