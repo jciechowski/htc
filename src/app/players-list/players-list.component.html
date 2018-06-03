@@ -4,7 +4,13 @@
     <div class="card">
       <ul class="list-group list-group-flush">
         <li *ngFor="let player of players$ | async" class="list-group-item">
-          {{ player.name }} {{ player.lastname }} #{{ player.jerseyNumber }} {{ Gender[player.gender] }}
+          {{ player.name }} {{ player.lastname }} #{{ player.jerseyNumber }}
+          <span *ngIf="player.gender === Gender.man">
+            <i class="blue fa fa-mars-stroke"></i>
+          </span>
+          <span *ngIf="player.gender === Gender.woman">
+            <i class="red fa fa-venus"></i>
+          </span>
         </li>
       </ul>
     </div>
