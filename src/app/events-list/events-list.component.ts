@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../shared/models/players';
 import { TeamEvent } from '../shared/models/events';
@@ -17,11 +18,25 @@ export class EventsListComponent implements OnInit {
   color = 'primary';
   checked = false;
 
-  constructor(private eventsService: EventsService, private playersService: PlayersService) {}
+  constructor(private eventsService: EventsService, private playersService: PlayersService) { }
 
   ngOnInit() {
+
     this.players$ = this.playersService.getPlayers();
-    this.teamEvents$ = this.eventsService.getEvents();
+    this.teamEvents$ = this.filterPastEvents();
+  }
+
+  private filterPastEvents() {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    return this.eventsService.getEvents().pipe(map(events =>
+      events.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= currentDate;
+      })
+    ));
+
   }
 
   changeAttendance(slider: MatSlideToggleChange, event: TeamEvent, player: Player) {
