@@ -3,6 +3,7 @@
     <div class="col-2 pull-down">
       <app-players-list></app-players-list>
     </div>
+    <app-add-event></app-add-event>
     <div class="col-2" *ngFor="let teamEvent of teamEvents$ | async">
       <app-event [event]="teamEvent"></app-event>
       <div *ngFor="let player of players$ | async" class="centered-checkbox">
@@ -12,6 +13,5 @@
         </label>
       </div>
     </div>
-    <app-add-event></app-add-event>
   </div>
 </div>
